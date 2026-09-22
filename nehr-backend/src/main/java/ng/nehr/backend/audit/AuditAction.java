@@ -1,0 +1,13 @@
+package ng.nehr.backend.audit;
+
+public enum AuditAction {
+    LOGIN_SUCCESS,
+    HOSPITAL_REGISTERED,
+    HOSPITAL_APPROVED,
+    DOCTOR_ADDED,
+    CONSENT_REQUESTED,
+    CONSENT_GRANTED,
+    CONSENT_REVOKED,
+    CREDENTIAL_ISSUED,
+    CREDENTIAL_REVOKED
+}
