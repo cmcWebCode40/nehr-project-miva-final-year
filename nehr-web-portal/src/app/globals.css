@@ -1,0 +1,254 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Brand palette, copied verbatim from the reference project's
+ * tailwind.config.ts (`theme.extend.colors.brand`) - the only colors this
+ * app is allowed to use per the design brief. Namespaced under `brand`
+ * (utilities like `bg-brand-primary-500`) so it never collides with the
+ * shadcn semantic tokens below, which are themselves mapped to these same
+ * values rather than Tailwind's default palette.
+ */
+@theme {
+  --color-brand-gray-100: #F9FBFC;
+  --color-brand-gray-200: #F3F5F6;
+  --color-brand-gray-250: #E2E8F0;
+  --color-brand-gray-300: #E1E6ED;
+  --color-brand-gray-400: #C8D2DF;
+  --color-brand-gray-500: #AAB7C6;
+  --color-brand-gray-600: #848F9F;
+  --color-brand-gray-650: #64748B;
+  --color-brand-gray-675: #6B7280;
+  --color-brand-gray-700: #5F738C;
+  --color-brand-gray-800: #4E5A6C;
+  --color-brand-gray-820: #4B5563;
+  --color-brand-gray-850: #45556C;
+  --color-brand-gray-900: #353F50;
+  --color-brand-gray-950: #1F2126;
+  --color-brand-gray-975: #0D0905;
+  --color-brand-gray-980: #0A0A0A;
+  --color-brand-gray-1000: #000000;
+
+  --color-brand-primary: #0275D8;
+  --color-brand-primary-25: #F7FAFC;
+  --color-brand-primary-50: #EBF8FE;
+  --color-brand-primary-70: #DBEAFE;
+  --color-brand-primary-100: #B0E9F5;
+  --color-brand-primary-200: #94C2E9;
+  --color-brand-primary-500: #0275D8;
+  --color-brand-primary-550: #096DD9;
+  --color-brand-primary-600: #025EAD;
+  --color-brand-primary-650: #0056A6;
+  --color-brand-primary-700: #0F172A;
+  --color-brand-primary-800: #002B4B;
+
+  --color-brand-blue-50: #EAF9FF;
+  --color-brand-blue-60: #E3F2FD;
+  --color-brand-blue-75: #E0F9FF;
+  --color-brand-blue-100: #B3E5FC;
+  --color-brand-blue-150: #DCE8F2;
+  --color-brand-blue-175: #FAFDFF;
+  --color-brand-blue-180: #93ADB9;
+  --color-brand-blue-185: #F7FDFF;
+  --color-brand-blue-200: #80E1FF;
+  --color-brand-blue-500: #00B8DE;
+  --color-brand-blue-550: #479FC8;
+  --color-brand-blue-575: #338FDE;
+  --color-brand-blue-600: #0277BD;
+  --color-brand-blue-650: #107AA8;
+  --color-brand-blue-700: #006F87;
+  --color-brand-blue-800: #18425D;
+  --color-brand-blue-850: #014682;
+  --color-brand-blue-870: #1A1F71;
+  --color-brand-blue-875: #1A4983;
+  --color-brand-blue-880: #012F56;
+  --color-brand-blue-900: #00425F;
+  --color-brand-blue-925: #00354C;
+  --color-brand-blue-950: #10345E;
+  --color-brand-blue-975: #051121;
+
+  --color-brand-green-25: #FBFFFB;
+  --color-brand-green-50: #F0FDF4;
+  --color-brand-green-100: #F1FEF1;
+  --color-brand-green-200: #BEF2B9;
+  --color-brand-green-300: #D0FAE5;
+  --color-brand-green-500: #00A63E;
+  --color-brand-green-520: #00C950;
+  --color-brand-green-550: #009966;
+  --color-brand-green-600: #163C29;
+  --color-brand-green-700: #36743D;
+
+  --color-brand-amber: #AF5F26;
+  --color-brand-amber-25: #FFFBEB;
+  --color-brand-amber-50: #FFF7ED;
+  --color-brand-amber-75: #FFE9A8;
+  --color-brand-amber-100: #FEF6CF;
+  --color-brand-amber-200: #FFB900;
+  --color-brand-amber-220: #F0B100;
+  --color-brand-amber-250: #DB9F18;
+  --color-brand-amber-300: #FEE685;
+  --color-brand-amber-325: #FDED94;
+  --color-brand-amber-350: #EC9B40;
+  --color-brand-amber-400: #E17100;
+  --color-brand-amber-420: #F47920;
+  --color-brand-amber-500: #AF5F26;
+  --color-brand-amber-600: #F54900;
+  --color-brand-amber-700: #973C00;
+
+  --color-brand-red-50: #FBE9E9;
+  --color-brand-red-100: #F8D7DA;
+  --color-brand-red-200: #F5C2C7;
+  --color-brand-red-300: #F4B7B5;
+  --color-brand-red-500: #EE312A;
+  --color-brand-red-510: #FB2C36;
+  --color-brand-red-550: #DC4437;
+  --color-brand-red-575: #C92C2C;
+  --color-brand-red-600: #8B1A1A;
+  --color-brand-red-700: #A4251A;
+
+  --color-brand-purple-50: #FAF5FF;
+  --color-brand-purple-500: #9810FA;
+  --color-brand-purple-600: #5B21B6;
+
+  --color-brand-pink-50: #FFEFF3;
+  --color-brand-pink-60: #FDF2FA;
+  --color-brand-pink-150: #FCCEEE;
+  --color-brand-pink-500: #F50041;
+  --color-brand-pink-600: #C11574;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Every shadcn semantic token below is mapped to the brand palette above,
+ * not Tailwind/shadcn's own default neutral scale - per the brief,
+ * on-brand color is not optional polish here.
+ */
+:root {
+  --background: #FFFFFF;
+  --foreground: #1F2126;
+  --card: #FFFFFF;
+  --card-foreground: #1F2126;
+  --popover: #FFFFFF;
+  --popover-foreground: #1F2126;
+  --primary: #0275D8;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F3F5F6;
+  --secondary-foreground: #353F50;
+  --muted: #F3F5F6;
+  --muted-foreground: #5F738C;
+  --accent: #EBF8FE;
+  --accent-foreground: #002B4B;
+  --destructive: #EE312A;
+  --border: #E1E6ED;
+  --input: #E1E6ED;
+  --ring: #0275D8;
+  --chart-1: #0275D8;
+  --chart-2: #00A63E;
+  --chart-3: #AF5F26;
+  --chart-4: #EE312A;
+  --chart-5: #9810FA;
+  /* 4px, uniform across buttons and every radius-scaled surface. */
+  --radius: 0.25rem;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #353F50;
+  --sidebar-primary: #0275D8;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F3F5F6;
+  --sidebar-accent-foreground: #353F50;
+  --sidebar-border: #E1E6ED;
+  --sidebar-ring: #0275D8;
+}
+
+.dark {
+  --background: #051121;
+  --foreground: #F9FBFC;
+  --card: #10345E;
+  --card-foreground: #F9FBFC;
+  --popover: #10345E;
+  --popover-foreground: #F9FBFC;
+  --primary: #0275D8;
+  --primary-foreground: #FFFFFF;
+  --secondary: #00354C;
+  --secondary-foreground: #F9FBFC;
+  --muted: #00354C;
+  --muted-foreground: #AAB7C6;
+  --accent: #00425F;
+  --accent-foreground: #F9FBFC;
+  --destructive: #FB2C36;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #0275D8;
+  --chart-1: #0275D8;
+  --chart-2: #00A63E;
+  --chart-3: #AF5F26;
+  --chart-4: #EE312A;
+  --chart-5: #9810FA;
+  --sidebar: #10345E;
+  --sidebar-foreground: #F9FBFC;
+  --sidebar-primary: #0275D8;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #00354C;
+  --sidebar-accent-foreground: #F9FBFC;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #0275D8;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+  }
+}
